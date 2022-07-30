@@ -1,0 +1,38 @@
+.user-item {
+    margin: 0.7rem;
+    width: 2rem;
+    min-width: 22rem;
+}
+.user-item_content{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    padding: 0.5rem;
+    color: white;
+    background: #292929;
+}
+.user-item_data{
+    display: flex;
+}
+.user-item_data p{
+    padding: 0.3rem;
+    font-size: 1.7rem;
+}
+.user-item_photo{
+}
+.user-item a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    padding: 1rem;
+    color: white;
+    background: #292929;
+}
+.user-item a:hover,
+.user-item a:active {
+  color: #ffd900;
+}
