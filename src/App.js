@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Users from './users/containers/Users';
 import NewTravel from './travels/containers/NewTravel';
+import UsersTravels from './travels/containers/UsersTravels';
 import Navigation from './shared/components/Navigation/Navigation';
 
 const App = () => {
@@ -13,6 +14,9 @@ const App = () => {
         <Switch>
           <Route path="/" exact>
             <Users />
+          </Route>
+          <Route path="/:userId/profile">
+            <UsersTravels />
           </Route>
           <Route path="/travels/new">
             <NewTravel />
