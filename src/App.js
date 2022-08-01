@@ -18,6 +18,9 @@ const App = () => {
           <Route path="/:userId/profile">
             <UsersTravels />
           </Route>
+          <Route path="/:userId/profile/:creatorId">
+            <UsersTravels />
+          </Route>
           <Route path="/travels/new">
             <NewTravel />
           </Route>
