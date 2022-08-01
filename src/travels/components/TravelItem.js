@@ -1,11 +1,21 @@
 import React from "react";
+import { Link, HashRouter} from "react-router-dom";
+
 
 const TravelItem = props => {
+    const url = `/profile/${props.creatorId}/travel/${props.id}`
+    
     return (
+
+        
         <li className="place-item">
             <div className="place-item__info">
-                <h2>{props.destination}</h2>
-                <h3>{props.description}</h3>
+
+            <HashRouter>
+            <Link to={url} >{props.destination}</Link>
+            </HashRouter>
+            
+
             </div>
             <div className="place-item__photos">
 

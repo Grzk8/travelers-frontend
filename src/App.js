@@ -5,6 +5,7 @@ import Users from './users/containers/Users';
 import NewTravel from './travels/containers/NewTravel';
 import UsersTravels from './travels/containers/UsersTravels';
 import Navigation from './shared/components/Navigation/Navigation';
+import TravelDetails from './travels/components/TravelDetails';
 
 const App = () => {
   return (
@@ -18,8 +19,8 @@ const App = () => {
           <Route path="/:userId/profile">
             <UsersTravels />
           </Route>
-          <Route path="/:userId/profile/:creatorId">
-            <UsersTravels />
+          <Route path="/profile/:creatorId/travel/:id" exact>
+            <TravelDetails/>
           </Route>
           <Route path="/travels/new">
             <NewTravel />

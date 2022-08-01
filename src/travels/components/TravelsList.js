@@ -12,7 +12,7 @@ const TravelsList = props => {
                     destination={travel.destination}
                     description={travel.description}
                     photos={travel.photos}
-                    userId={travel.userId}
+                    creatorId={travel.creatorId}
                     location={travel.location}
                 />
             )}
