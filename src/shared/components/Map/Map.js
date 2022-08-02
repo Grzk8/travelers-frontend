@@ -33,16 +33,23 @@ const Map = props => {
         });
 
         props.travelData.map(l => {
-            const marker = new window.google.maps.Marker({ position: l.location, map: map, title: l.destination, description: l.description, photos: l.photos, crearor: creatorId });
+            const marker = new window.google.maps.Marker({
+                position: l.location,
+                map: map,
+                title: l.destination,
+                description: l.description,
+                photos: l.photos,
+                crearor: creatorId
+            });
 
             window.google.maps.event.addListener(
-                marker, 'click', function ()  {
-                    {setDestination(marker.title)} 
-                    {setDescription(marker.description)} 
-                    {setPhotos(marker.photos)} 
-                    {setcCreatorId(marker.crearor)} 
-                    { openCartHandler()}
-                } );
+                marker, 'click', function () {
+                    { setDestination(marker.title) }
+                    { setDescription(marker.description) }
+                    { setPhotos(marker.photos) }
+                    { setcCreatorId(marker.crearor) }
+                    { openCartHandler() }
+                });
             return marker;
         });
         console.log(destination)
@@ -50,20 +57,19 @@ const Map = props => {
 
     return (
         <>
-                <div ref={mapRef} className="map"></div>
-        {isCartOpen ? (
-            <Card >
-             <div>
-                <h2>{destination}</h2>
-                <p>{description}</p>
-                {Object.values(photos).map(photo => {
-                    return <img key={photo} height="400px" width="400px" src={photo} ></img>
-                })}
-        
-                {console.log(photos)}
-             </div>
-            </Card>
-        ): null} 
+            <div ref={mapRef} className="map"></div>
+            {isCartOpen ? (
+                <Card >
+                    <div>
+                        <h2>{destination}</h2>
+                        <p>{description}</p>
+                        {Object.values(photos).map(photo => {
+                            return <img key={photo} height="400px" width="400px" src={photo} ></img>
+                        })}
+                        {console.log(photos)}
+                    </div>
+                </Card>
+            ) : null}
         </>
     );
 };
