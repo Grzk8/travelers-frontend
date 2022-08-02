@@ -7,6 +7,7 @@ import UsersTravels from './travels/containers/UsersTravels';
 import Navigation from './shared/components/Navigation/Navigation';
 import TravelDetails from './travels/components/TravelDetails';
 import UpdateTravell from './travels/containers/UpdateTravel';
+import Auth from './users/containers/Auth';
 
 const App = () => {
   return (
@@ -28,6 +29,9 @@ const App = () => {
           </Route>
           <Route path="/travels/:placeId">
             <UpdateTravell />
+          </Route>
+          <Route path="/auth">
+            <Auth />
           </Route>
         </Switch>
       </main>
