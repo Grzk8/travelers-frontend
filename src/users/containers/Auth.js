@@ -7,11 +7,15 @@ import Button from '../../shared/components/Button/Button';
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { AuthContext } from "../../shared/context/auth-context";
+import LoadingSpinner from "../../shared/components/Spinner/LoadingSpinner";
 
 const Auth = () => {
-    const [isLoginMode, setIsLoginMode] = useState(true);
     const auth = useContext(AuthContext);
+    const [isLoginMode, setIsLoginMode] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
 
+    
     const [formState, inputHandler, setFormData] = useForm(
         {
             email: {
@@ -26,10 +30,58 @@ const Auth = () => {
         false
     );
 
-    const authSubmitHandler = event => {
+    const authSubmitHandler = async event => {
         event.preventDefault();
-        console.log(formState.inputs);
-        auth.login();
+
+        setIsLoading(true);
+        if (isLoginMode) {
+             try {
+   
+                const response = await fetch('http://localhost:5000/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+                if (!response.ok) {
+                    throw new Error (responseData.message);
+                }
+                setIsLoading(false);
+                auth.login();
+            } catch (err) {
+                console.log(err);
+                setError(err.message);
+            }
+        } else {
+            try {
+   
+                const response = await fetch('http://localhost:5000/api/users/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fullName: formState.inputs.name.value,
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+                if (!response.ok) {
+                    throw new Error (responseData.message);
+                }
+                setIsLoading(false);
+                auth.login();
+            } catch (err) {
+                console.log(err);
+                setError(err.message);
+            }
+        };
     };
 
     const switchModeHandler = () => {
@@ -56,7 +108,9 @@ const Auth = () => {
         setIsLoginMode(prevMode => !prevMode);
     };
 
-    return <Card className="auth">
+    return <>
+     <Card className="auth">
+        {isLoading && <LoadingSpinner asOverlay/>}
         <h2>Login</h2>
         <hr />
         <form onSubmit={authSubmitHandler}>
@@ -96,6 +150,8 @@ const Auth = () => {
             {isLoginMode ? 'You don`t have a account? SIGNUP' : 'LOGIN'}
         </Button>
     </Card>
+    </>
+   
 };
 
 export default Auth;

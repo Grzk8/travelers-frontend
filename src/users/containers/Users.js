@@ -1,16 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import LoadingSpinner from '../../shared/components/Spinner/LoadingSpinner';
 
 import UsersList from '../components/UsersList';
 
 const Users = () => {
-    const Users = [{
-        id: '001',
-        firstName: 'Grzegorz',
-        lastName: 'Kaczor',
-        photo: 'https://media-exp1.licdn.com/dms/image/C4E35AQHWU9Dy4Qo5cA/profile-framedphoto-shrink_200_200/0/1603349375467?e=1659718800&v=beta&t=3N8kUVzXatAodLv0HXulRX65WLVb6HBT6DiUVVI-szo'
-    }];
+    const [isLoading, setIsLoading] = useState(false);
+    const [users, setUsers] = useState();
 
-    return <UsersList users={Users}/>
+
+    useEffect (() => {
+        const request = async () => {
+            setIsLoading(true);
+            try {
+                const response = await fetch('http://localhost:5000/api/users');
+                const responseData = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(responseData.message);
+                }
+                setUsers(responseData.users);
+            } catch (err) {
+                console.log(err);
+            }
+            setIsLoading(false);
+        };
+        request();
+    });
+
+    return <>
+        {isLoading && (<div className='center'> <LoadingSpinner /></div>)}
+        { !isLoading && Users && <UsersList users={Users} />}
+    </>
+
 };
 
 export default Users;
