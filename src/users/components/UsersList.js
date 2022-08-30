@@ -13,19 +13,21 @@ const UsersList = props => {
         )
     }
 
+
+
     return (
         <ul className="users-list">
-            {props.users.map(user => {
-                return <UsersItem
-                    key={user.id}
-                    id={user.id}
-                    photo={user.photo}
-                    firstName={user.firstName}
-                    lastName={user.lastName}
-                />
-            })}
+          {props.users.map(user => (
+            <UsersItem
+            key={user.id}
+            id={user.id}
+            photo={user.photo}
+            fullName={user.fullName}
+            />
+          ))}
         </ul>
-    )
+      );
+    
 };
 
 export default UsersList;

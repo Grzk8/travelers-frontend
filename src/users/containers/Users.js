@@ -14,6 +14,7 @@ const Users = () => {
             try {
                 const response = await fetch('http://localhost:5000/api/users');
                 const responseData = await response.json();
+                console.log(responseData)
 
                 if (!response.ok) {
                     throw new Error(responseData.message);
@@ -25,11 +26,11 @@ const Users = () => {
             setIsLoading(false);
         };
         request();
-    });
+    }, []);
 
     return <>
         {isLoading && (<div className='center'> <LoadingSpinner /></div>)}
-        { !isLoading && Users && <UsersList users={Users} />}
+        { !isLoading && Users && <UsersList users={users} />}
     </>
 
 };

@@ -14,8 +14,7 @@ const UsersItem = props => {
                         <Avatar photo={props.photo} alt={props.firstName + ' ' + props.lastName} />
                     </div>
                     <div className="user-item_data">
-                        <p>{props.firstName}</p>
-                        <p>{props.lastName}</p>
+                        <p>{props.fullName}</p>
                     </div>
                 </Link>
             </Card>

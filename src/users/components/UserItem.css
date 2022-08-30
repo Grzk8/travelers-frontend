@@ -21,6 +21,9 @@
     font-size: 1.7rem;
 }
 .user-item_photo{
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
 }
 .user-item a {
     display: flex;
