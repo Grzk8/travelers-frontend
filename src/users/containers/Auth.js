@@ -52,7 +52,7 @@ const Auth = () => {
                     throw new Error (responseData.message);
                 }
                 setIsLoading(false);
-                auth.login();
+                auth.login(responseData.user.id);
             } catch (err) {
                 console.log(err);
                 setError(err.message);
@@ -76,7 +76,7 @@ const Auth = () => {
                     throw new Error (responseData.message);
                 }
                 setIsLoading(false);
-                auth.login();
+                auth.login(responseData.user.id);
             } catch (err) {
                 console.log(err);
                 setError(err.message);
@@ -126,7 +126,7 @@ const Auth = () => {
                 />}
             <Input
                 id="email"
-                element="imput"
+                element="input"
                 type="email"
                 label="email"
                 validators={[VALIDATOR_EMAIL()]}
@@ -135,7 +135,7 @@ const Auth = () => {
             />
             <Input
                 id="password"
-                element="imput"
+                element="input"
                 type="password"
                 label="password"
                 validators={[VALIDATOR_MINLENGTH(5)]}
