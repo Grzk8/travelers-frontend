@@ -1,7 +1,6 @@
 import React from "react";
 import {useParams} from 'react-router-dom'
 
-import TravelsList from "../components/TravelsList";
 import Map from '../../shared/components/Map/Map';
 
 const PlacesTemp = [
