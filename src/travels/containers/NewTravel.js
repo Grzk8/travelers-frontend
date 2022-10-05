@@ -14,7 +14,6 @@ import './NewTravel.css';
 
 const NewTravel = () => {
     const auth = useContext(AuthContext);
-    //const [isLoading, setIsLoading] = useState(false);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [formState, inputHandler] = useForm(
         {
