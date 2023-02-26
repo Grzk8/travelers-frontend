@@ -1,14 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import './Map.css';
 import '../Card'
 import Card from "../Card";
 
 const Map = props => {
-
-
     const mapRef = useRef();
-
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [description, setDescription] = useState();
     const [photos, setPhotos] = useState();
@@ -16,20 +12,17 @@ const Map = props => {
     const [destination, setDestination] = useState();
 
     const openCartHandler = () => {
-
         setIsCartOpen(true);
     }
 
-    // const closeCartHandler = () => {
-    //     setIsCartOpen(false);
-    // };
-
-
+    const closeCartHandler = () => {
+        setIsCartOpen(false);
+    };
 
     useEffect(() => {
         const map = new window.google.maps.Map(mapRef.current, {
             center: { lat: 40.4501, lng: 23.5200 },
-            zoom: 3
+            zoom: 4
         });
 
         props.travelData.map(l => {
@@ -56,12 +49,15 @@ const Map = props => {
     });
 
     return (
-        <>
+        <div className="map_container">
             <div ref={mapRef} className="map"></div>
             {isCartOpen ? (
-                <Card >
-                    <div>
-                        <h2>{destination}</h2>
+                <Card className="travel_card">
+                    <div className="my_travel_container">
+                        <div className="my_travel_container_top">
+                        <div className="my_travel_container_top-close" onClick={closeCartHandler}></div>
+                            <h2>{destination}</h2>
+                        </div>
                         <p>{description}</p>
                         {Object.values(photos).map(photo => {
                             return <img key={photo} height="400px" width="400px" src={photo} ></img>
@@ -70,7 +66,7 @@ const Map = props => {
                     </div>
                 </Card>
             ) : null}
-        </>
+        </div>
     );
 };
 
